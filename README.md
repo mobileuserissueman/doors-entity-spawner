@@ -1,1 +1,1 @@
-entity spawner. credit to @RegularVyxinu and @DripCapybara.
+entity spawner. credit to @RegularVyxinu and @DripCapybara, and @FranciscoNeto5123
