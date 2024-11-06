@@ -1657,5 +1657,1864 @@ entity:Run()
  end,
 })
 
+local Button = MainTab:CreateButton({
+   Name = "Spawn Depth",
+   Callback = function()
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "Depth",
+    Model = "https://github.com/Nicolaspenteado/Depth/blob/main/depth2.rbxm?raw=true",
+    Speed = 300,
+    MoveDelay = 3,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 65,
+    SpawnInFront = false,
+    ShatterLights = true,
+    FlickerLights = {
+        Enabled = true,
+        Duration = 1
+    },
+    Cycles = {
+        Min = 1,
+        Max = 4,
+        Delay = 0.25
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = true,
+    DeathMessage = {"You died to Depth", "The lights will flicker when it spawns.", "Don't NOT hide.", "You're doing good so far.", "Good luck"},
+    IsCuriousLight = false
+})
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("",true)
+end
+
+entity.Debug.OnEntityDespawned = function()
+    require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("",true)
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    print("Player has died")
+end
+
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Greed",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Greed",
+		Asset = "https://github.com/plamen6789/CustomDoorsMonsters/blob/main/Greed.rbxm?raw=true",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 150,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = true,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 50,
+		Amount = 125
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call greed.", "Greed spawns when you take too much gold.", "Hence the name, greed.", "Better luck next time!", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Trauma",
+   Callback = function()
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+
+---====== Create entity ======---
+
+
+local entity = Spawner.createEntity({
+    CustomName = "Trauma",
+    Model = "https://github.com/munciseek/DOORS-entity-models/blob/main/Nightmare/Trauma.rbxm?raw=true", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 100,
+    MoveDelay = 0,
+    HeightOffset = 4,
+    CanKill = true,
+    KillRange = 30,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 3
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1,
+        Delay = 0
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = true,
+    BreakCrucifix = true,
+    DeathMessage = {"you die to A-10", "yee."},
+    IsCuriousLight = true
+})
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+wait(30)
+game.workspace.Trauma:Destroy()
+end
+
+entity.Debug.OnEntityDespawned = function()
+    local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+ 
+---====== Display achievement ======---
+achievementGiver({
+    Title = "Ser Verty Has Deted",
+    Desc = "Ave Sira Cant Detdesa",
+    Reason = "Encounter Trauma",
+    Image = "rbxassetid://0"
+})
+end
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/huyhoangphuc/ytu/main/A-200Jumpscare'))()
+end
+
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn G-95",
+   Callback = function()
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+
+---====== Create entity ======---
+
+
+local entity = Spawner.createEntity({
+    CustomName = "G95",
+    Model = "https://github.com/munciseek/DOORS-entity-models/blob/main/Nightmare/G-95.rbxm?raw=true", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 100,
+    MoveDelay = 0,
+    HeightOffset = 4,
+    CanKill = true,
+    KillRange = 30,
+    SpawnInFront = true,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 3
+    },
+    Cycles = {
+        Min = 4,
+        Max = 5.5,
+        Delay = 0
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = true,
+    BreakCrucifix = true,
+    DeathMessage = {"you die to A-10", "yee."},
+    IsCuriousLight = true
+})
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+wait(30)
+game.workspace.G95:Destroy()
+end
+
+entity.Debug.OnEntityDespawned = function()
+    local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+ 
+---====== Display achievement ======---
+achievementGiver({
+    Title = "The Will A Sea",
+    Desc = "Are You Will Do",
+    Reason = "Encounter G-95",
+    Image = "rbxassetid://537141778"
+})
+end
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/huyhoangphuc/ytu/main/A-200Jumpscare'))()
+end
+
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn A-15",
+   Callback = function()
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "A-15",
+    Model = "https://github.com/Franciscolovedoorshardcoremode/EntitiesScraryMode/blob/main/a10.rbxm?raw=true", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 100,
+    MoveDelay = 1.8,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 40,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 8
+    },
+    Cycles = {
+        Min = 0.5,
+        Max = 0.5,
+        Delay = 0
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {5.15, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = false,
+    DeathMessage = {"you die to A-10", "yee."},
+    IsCuriousLight = true
+})
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+end
+
+entity.Debug.OnEntityDespawned = function()
+    workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]:WaitForChild("Door").ClientOpen:FireServer()
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+end
+
+entity.Debug.OnDeath = function()
+    warn("You died.")
+end
+
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn A-35",
+   Callback = function()
+local Spawner = loadstring(game:HttpGet('https://raw.githubusercontent.com/MuhXd/DoorSuff/main/OtherSuff/DoorEntitySpawn%2BSource'))()
+
+
+-- Create entity
+local entity = Spawner.createEntity({
+    CustomName = "A-35", -- Custom name of your entity
+    Model = "rbxassetid://13486970543", -- Can be GitHub file or rbxassetid
+    Speed = 100, -- Percentage, 100 = default Rush speed
+    DelayTime = 3, -- Time before starting cycles (seconds)
+    HeightOffset = 0.5,
+    CanKill = true,
+    NoDieOnCrouching = false,
+    NoHiding = false,
+    AntiCrucifix = false,
+    KillRange = 60,
+    OneRoom = false,
+    DieOnLook = false,
+    BreakLights = false,
+    BackwardsMovement = false,
+     MovementDeath = {
+        false, -- Turned On?
+        '1',  --- '1'= 'Instant Without Being Looked out' | '2' = 'With Being Looked At'
+    },
+    FlickerLights = {
+        false, -- Enabled/Disabled
+        1, -- Time (seconds)
+    },
+    Cycles = {
+        Min = 1.5,
+        Max = 1.5,
+        WaitTime = 1,
+    },
+    CamShake = {
+        true, -- Enabled/Disabled
+        {30, 30, 0.1, 1}, -- Shake values (don't ch--ge if you don't know)
+        50, -- Shake start distance (from Entity to you)
+    },
+    Jumpscare = {
+        false, -- Enabled/Disabled
+        {
+            Type = "3", -- "Normal" or 1 | "Pop" or 2 | "endlessdoorsrebound" or "Rebound" or 3 | More coming Soon
+            Image1 = "rbxassetid://18384688860", -- Image1 url
+            Image2 = "rbxassetid://18384701999", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                "18103906189", -- SoundId Link or Roblox ID
+                { Volume = 3 }, -- Sound properties
+            },
+            Sound2 = {
+                "18103906189", -- SoundId Link or Roblox ID
+                { Volume = 3 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled/Disabled
+                Color3.fromRGB(255, 255, 255), -- Color
+            },
+            Tease = {
+                true, -- Enabled/Disabled
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
+    Color = 'GuidingLight', -- CuriousLight ( Yellow ) | GuidingLight ( Blue )
+    DiffrentMessages = false,
+    CustomDialog = {  
+        {"A-60 has seen you.", "It will consume anyone on sight.", "It takes a bit to fully spawn in", "so you can use that to your advantage."}, -- Death Messages
+        {"Stop Dieing"},
+        {"Bruh", "Use what you have learned from Rush!"},
+        {"It seems like Template is causing quite the ruckus...", "Hide in a closet or bed as quickly as possible!"},
+         {"I have told You What to do", "YOU JUST HAVE A SKILL ISSUE"}
+    }
+})
+
+-----[[ Advanced Sctipting ]]-----
+
+entity.Debug.OnEntityMoving = function(Invincible,Hiding,plrCollisionPoint)
+print("Invincible: "..tostring(Invincible))
+print("Player to Entity Collision (None hiding Point): "..tostring(plrCollisionPoint))
+print("Hiding: "..tostring(Hiding))
+end
+       
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned:")   
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("Nostalgic frikig")
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity has started moving:")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity has finished rebound:")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(entityTable, room)
+    print("Entity:", "has entered room:",room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player has looked at entity:")
+end
+
+entity.Debug.OnDeath = function()
+    warn("Player has died.")
+end
+
+------------------------
+
+-- Run the created entity
+Spawner.runEntity(entity)
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Frostbite",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Frostbite",
+		Asset = "rbxassetid://12272255258",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 0.000000000000000000000001,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 10
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call frostbite.", "Frostbite can spawn randomly.", "It will be freezing in that room.", "Get out as fast as you can!", "Try again, please."},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Cease",
+   Callback = function()
+game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(0, 0, 100)
+game.Lighting.MainColorCorrection.Contrast = 0.3
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(10), {Contrast = 0}):Play()
+local TweenService = game:GetService("TweenService")
+local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(12),{TintColor = Color3.fromRGB(255, 255, 255)})
+TW:Play()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Cease",
+		Asset = "rbxassetid://16167836521",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 0.00000000001,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 10
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to Cease.", "Cease spawner in at random.", "When they spawn in, a blue light will appear", "After, a noise would play.", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+        print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Surge",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Surge",
+		Asset = "rbxassetid://15114507528",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 1000,
+		Delay = 5,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 10
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call Surge.", "When they spawn in, it's the ngl.", "Have no idea what this does.", "Better luck next time!", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Silence",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Silence",
+		Asset = "rbxassetid://11792913759",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 0.000000000000001,
+		Delay = 5,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 10
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"Crouch..", "Shh", "Shhh", "SHHHHH", "SHUT UP!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Gloom",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Gloom",
+		Asset = "rbxassetid://14065612251",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 78,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 10
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call gloom.", "just hide lol", "idot.", "Better luck next time!", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Sandstorm",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Sandstorm",
+		Asset = "rbxassetid://13036748750",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 90,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 50
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call Sandstorm.", "They said to just read the paper..", "but the page is sandy..", "welp", "Just hide, it does 50 damage only."},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Blaze",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Blaze",
+		Asset = "rbxassetid://11957203186",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 250,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 50
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"Mine craft, the next lines are placeholders. too lazy", "Greed spawns when you take too much gold.", "Hence the name, greed.", "Better luck next time!", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Shocker",
+   Callback = function()
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local function spawnShocker()
+    local shockerModel = game:GetObjects("rbxassetid://12777079952")[1]
+    shockerModel.PrimaryPart = shockerModel:FindFirstChild("HumanoidRootPart") or shockerModel:FindFirstChildWhichIsA("Part")
+    
+    local camera = Workspace.CurrentCamera
+    shockerModel:SetPrimaryPartCFrame(camera.CFrame * CFrame.new(0, 0, -7))
+    shockerModel.Parent = Workspace
+
+    local oogaBoogaaPart = shockerModel:WaitForChild("OOGA BOOGAAAA")
+    local horrorScream = shockerModel:WaitForChild("OOGA BOOGAAAA"):WaitForChild("HORROR SCREAM 15")
+
+    local lookDuration = 5
+    local startTime = tick()
+    local playerLookingAtShocker = true
+
+    while playerLookingAtShocker do
+        wait(4)
+
+        local angle = (oogaBoogaaPart.Position - character.PrimaryPart.Position).unit
+        local direction = camera.CFrame.LookVector
+
+        if (angle:Dot(direction) > 0.9) then
+            if tick() - startTime >= lookDuration then
+                horrorScream:Play()
+                humanoid:TakeDamage(20)
+                local function GetGitSound(GithubSnd,SoundName)
+				local url=GithubSnd
+				if not isfile(SoundName..".mp3") then
+					writefile(SoundName..".mp3", game:HttpGet(url))
+				end
+				local sound=Instance.new("Sound")
+				sound.SoundId=(getcustomasset or getsynasset)(SoundName..".mp3")
+				return sound
+			end
+			game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(255, 255, 255)
+	game.Lighting.MainColorCorrection.Contrast = 1
+	local tween = game:GetService("TweenService")
+	tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(2.5), {Contrast = 0}):Play()
+	local TweenService = game:GetService("TweenService")
+	local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(80),{TintColor = Color3.fromRGB(255, 255, 255)})
+	TW:Play()
+        local Jc = GetGitSound("https://github.com/Nowhywhat/Entity-sound/blob/main/shocker%20Jumpscares.mp3?raw=true","Attack")
+				Jc.Parent = workspace
+				Jc.Volume = 5
+				Jc:Play()
+                playerLookingAtShocker = false
+
+                local speed = 20
+                local targetPosition = character.PrimaryPart.Position
+
+                while oogaBoogaaPart.Position.Y > targetPosition.Y do
+                    local directionToPlayer = (targetPosition - oogaBoogaaPart.Position).unit
+                    oogaBoogaaPart.Position = oogaBoogaaPart.Position + directionToPlayer * speed * 0.1
+                    wait(0.1)
+                end
+
+                oogaBoogaaPart.CanCollide = false
+                oogaBoogaaPart.Anchored = false
+                wait(2)
+                shockerModel:Destroy()
+game:GetService("ReplicatedStorage").GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Shocker"
+local func, setupval, getinfo, typeof, getgc, next = nil, debug.setupvalue or setupvalue, debug.getinfo or getinfo, typeof, getgc, next
+
+for i,v in next, getgc(false) do
+    if typeof(v) == "function" then
+        local info = getinfo(v)
+        if info.currentline == 54 and info.nups == 2 and info.is_vararg == 0 then
+            func = v
+            break
+        end
+    end
+end
+
+local function DeathHint(hints, type: string)
+    setupval(func, 1, hints)
+    if type ~= nil then
+        setupval(func, 2, type)
+    end
+end
+
+DeathHint({
+    "You died to who you call Shocker...",
+    "Dont look at it or it stuns you!"
+}, "Blue") -- "Blue" or "Yellow"
+                break
+            end
+        else
+            
+            oogaBoogaaPart.CanCollide = false
+            oogaBoogaaPart.Anchored = false
+            break
+        end
+    end
+oogaBoogaaPart.CanCollide = false
+oogaBoogaaPart.Anchored = false
+wait(3)
+    shockerModel:Destroy()
+end
+
+spawnShocker()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn Crumble",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "Crumble",
+		Asset = "rbxassetid://15145616275",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 1
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 325,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = true,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 9999
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call greed.", "Greed spawns when you take too much gold.", "Hence the name, greed.", "Better luck next time!", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Spawn A-10 (wiki version)",
+   Callback = function()
+---====== Load spawner ======---
+
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V2/Source.lua"))()
+
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "A-10",
+		Asset = "rbxassetid://12835725676",
+		HeightOffset = 0
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 2
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = true
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 90,
+		Delay = 0,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = false,
+		Type = "Ambush", -- "Blitz"
+		Min = 3,
+		Max = 7,
+		Delay = 0
+	},
+	Damage = {
+		Enabled = true,
+		Range = 30,
+		Amount = 50
+	},
+	Crucifixion = {
+		Enabled = true,
+		Range = 40,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to who you call greed.", "Greed spawns when you take too much gold.", "Hence the name, greed.", "Better luck next time!", "See ya!"},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+end)
+
+entity:SetCallback("OnStartMoving", function()
+    print("Entity has started moving")
+end)
+
+entity:SetCallback("OnEnterRoom", function(room, firstTime)
+    if firstTime == true then
+        print("Entity has entered room: ".. room.Name.. " for the first time")
+    else
+        print("Entity has entered room: ".. room.Name.. " again")
+    end
+end)
+
+entity:SetCallback("OnLookAt", function(lineOfSight)
+	if lineOfSight == true then
+		print("Player is looking at entity")
+	else
+		print("Player view is obstructed by something")
+	end
+end)
+
+entity:SetCallback("OnRebounding", function(startOfRebound)
+    if startOfRebound == true then
+        print("Entity has started rebounding")
+	else
+        print("Entity has finished rebounding")
+	end
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
+end)
+
+entity:SetCallback("OnDespawned", function()
+    print("Entity has despawned")
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+	end
+end)
+
+--[[
+
+DEVELOPER NOTE:
+By overwriting 'CrucifixionOverwrite' the default crucifixion callback will be replaced with your custom callback.
+
+entity:SetCallback("CrucifixionOverwrite", function()
+    print("Custom crucifixion callback")
+end)
+
+]]--
+
+---====== Run entity ======---
+
+entity:Run()
+ end,
+})
+
 --credit to regular vyxinu, and dripcapybara ,FranciscoNeto5123
 plamen6789, fnaclol
