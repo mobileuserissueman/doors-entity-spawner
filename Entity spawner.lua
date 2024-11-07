@@ -1429,7 +1429,7 @@ particle.Spark.Enabled = false
     local cue = Instance.new("Sound")
     cue.Parent = workspace
     cue.Name = "Bubbles"
-    cue.SoundId = "rbxassetid:/9113601215"
+    cue.SoundId = "rbxassetid://9113601215"
     cue.Volume = 1
     cue.Pitch = 0.6
     local distort = Instance.new("DistortionSoundEffect")
@@ -2447,7 +2447,7 @@ entity:SetCallback("OnSpawned", function()
 end)
 
 entity:SetCallback("OnStartMoving", function()
-        print("Entity has started moving")
+    print("Entity has started moving")
 end)
 
 entity:SetCallback("OnEnterRoom", function(room, firstTime)
@@ -3515,6 +3515,3 @@ end)
 entity:Run()
  end,
 })
-
---credit to regular vyxinu, and dripcapybara ,FranciscoNeto5123
-plamen6789, fnaclol
